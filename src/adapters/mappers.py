@@ -34,6 +34,10 @@ class PostMapper(DataMapperProtocol[Post]):
             return Post(*row)
         return row
 
+    def find_all(self) -> list[Post]:
+        cursor = self._connection.execute("SELECT id, title FROM posts")
+        return [Post(*row) for row in cursor.fetchall()]
+
 
 class CommentMapper(DataMapperProtocol[Comment]):
     def __init__(self, connection: Connection) -> None:
@@ -70,4 +74,8 @@ class CommentMapper(DataMapperProtocol[Comment]):
         cursor = self._connection.execute(
             "SELECT id, body, post_id FROM comments WHERE post_id = ?", (post_id,)
         )
+        return [Comment(*row) for row in cursor.fetchall()]
+
+    def find_all(self) -> list[Comment]:
+        cursor = self._connection.execute("SELECT id, body, post_id FROM comments")
         return [Comment(*row) for row in cursor.fetchall()]

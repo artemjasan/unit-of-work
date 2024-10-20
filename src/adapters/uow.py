@@ -7,10 +7,10 @@ from src.application.uow.unit_of_work import UnitOfWork
 class SQLiteUnitOfWork(UnitOfWork):
     def __init__(self, connection: Connection, registry: MapperRegistry) -> None:
         super().__init__(registry)
-        self._conneciton = connection
+        self._connection = connection
 
     def commit(self) -> None:
-        self._conneciton.execute("BEGIN")
+        self._connection.execute("BEGIN")
 
         try:
             super().commit()

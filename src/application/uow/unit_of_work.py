@@ -8,7 +8,7 @@ class UnitOfWork(UnitOfWorkProtocol):
     def __init__(
         self,
         registry: MapperRegistry,
-        object_store: ObjectStore | None,
+        object_store: ObjectStore | None = None,
     ) -> None:
         self._registy = registry
         self._object_store = object_store if object_store else ObjectStore()

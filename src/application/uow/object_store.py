@@ -8,7 +8,9 @@ class ObjectStore:
         self._store: dict[Any, ObjectState] = {}
 
     def attach(self, entity, state: ObjectState) -> None:
+        print(self._store)
         self._store[entity] = state
+        print(self._store)
 
     def detach(self, entity) -> None:
         if entity in self._store:

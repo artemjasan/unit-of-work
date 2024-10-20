@@ -4,7 +4,7 @@ from src.application.protocols.id_generator import IdGeneratorProtocol
 
 
 class SQLiteIdGenerator(IdGeneratorProtocol):
-    def __init(self, connection: Connection) -> None:
+    def __init__(self, connection: Connection) -> None:
         self._connection = connection
 
     def generate_new_post_id(self) -> int:
@@ -15,8 +15,9 @@ class SQLiteIdGenerator(IdGeneratorProtocol):
 
     def _base_generate_new_id(self, sql_query: str) -> int:
         cursor = self._connection.execute(sql_query)
+        print("CUROSR", cursor, cursor.lastrowid)
 
-        if cursor.lastrowid is None:
+        if cursor.lastrowid:
             return 1
 
         return cursor.lastrowid + 1
